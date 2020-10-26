@@ -8,18 +8,17 @@ require_once __DIR__.'/../app/Controllers/PostController.php';
 require_once __DIR__.'/../DB/DBPDO.php';
 require_once __DIR__.'/../DB/DbFactory.php';
 $data= require 'config/database.php';
-$pdoConn = DbFactory::create($data);
-$conn = $pdoConn->getConn();
-$stm = $conn->query('select * from posts', \PDO::FETCH_ASSOC);
-IF($stm){
-    foreach ($stm as $row){
-        print_r($row);
+try {
+    $pdoConn = DbFactory::create($data);
+    $conn = $pdoConn->getConn();
+    $stm = $conn->query('select * from posts', \PDO::FETCH_ASSOC);
+    if ($stm) {
+        foreach ($stm as $row) {
+            print_r($row);
+        }
     }
 }
-try {
-    $conn = new PDO('mysql:dbname=freeblog;host=localhost','root','hidran');
-
-}catch (\PDOException $e){
+catch (\PDOException $e){
     die($e->getMessage());
 }
 

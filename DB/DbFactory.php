@@ -1,7 +1,6 @@
 <?php
-
 namespace App\DB;
-use App\DB\DbPdo;
+
 /**
  * Description of DbFactory
  *
@@ -11,6 +10,9 @@ class DbFactory {
 
     public static function create(array $options):DbPdo
     {
+        if(array_key_exists('dsn', $options)){
+            return  DbPdo::getInstance($options);
+        }
         if(!array_key_exists('charset', $options)){
             $options['charset'] ='utf8';
         }
