@@ -8,7 +8,7 @@
     <meta name="generator" content="php mvc">
     <title>FIREBLOG</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -46,7 +46,7 @@
 
 <main role="main" class="container">
 
-  COMMENTING SYSTEM
+    <h1><?=$this->name?></h1>
 
 </main><!-- /.container -->
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
