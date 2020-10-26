@@ -1,13 +1,14 @@
 <?php
 
 use App\Controllers\PostController;
-
+use App\DB\DbFactory;
 chdir(dirname(__DIR__));
 
 require_once __DIR__.'/../app/Controllers/PostController.php';
 require_once __DIR__.'/../DB/DBPDO.php';
+require_once __DIR__.'/../DB/DbFactory.php';
 $data= require 'config/database.php';
-$pdoConn = App\DB\DbPdo::getInstance($data);
+$pdoConn = DbFactory::create($data);
 $conn = $pdoConn->getConn();
 $stm = $conn->query('select * from posts', \PDO::FETCH_ASSOC);
 IF($stm){
