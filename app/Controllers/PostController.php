@@ -8,7 +8,7 @@ class PostController
     public $content = 'Hidran Arias';
 public function __construct()
 {
-    echo 'Post controller creato';
+    //echo 'Post controller creato';
 }
 
     /**
