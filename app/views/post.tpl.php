@@ -1,4 +1,4 @@
 <article>
-    <h1>Il mio post</h1>
-    <?=htmlentities($message)?>
+    <h2> <?=htmlentities($post->title)?></h2>
+    <?=htmlentities($post->message)?>
 </article>

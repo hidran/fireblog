@@ -1,5 +1,5 @@
 <?php
-function view($view, $data){
+function view($view, array $data){
     extract($data);
     ob_start();
     require  __DIR__. '/../app/views/'.$view.'.tpl.php';

@@ -16,4 +16,14 @@ class Post {
         }
         return $result;
     }
+    public  function find(int $id)
+    {
+        $result = [];
+        $stm = $this->conn->prepare('select * from posts where id=:id');
+        $stm->execute(['id' => $id]);
+        if($stm){
+            $result = $stm->fetch(PDO::FETCH_OBJ);
+        }
+        return $result;
+    }
 }

@@ -53,11 +53,7 @@ protected $Post;
      */
     public function show(int $postid)
     {
-        $message = ' this is a post message';
-        ob_start();
-        require_once __DIR__ . '/../views/post.tpl.php';
-        $content = ob_get_contents();
-        ob_end_clean();
-        return $content;
+        $post = $this->Post->find($postid);
+        return view('post', compact('post'));
     }
 }
