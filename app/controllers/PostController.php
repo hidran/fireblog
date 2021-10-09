@@ -30,7 +30,7 @@ class PostController
             case 'posts':
             case '':
             case 'home':
-                $this->content = $this > getPosts();
+                $this->content = $this->getPosts();
                 break;
             case 'post':
                 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -49,6 +49,22 @@ class PostController
                         $this->content = 'Method not found';
                     }
                     break;
+                }
+                elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    if ($token2) {
+                        if (is_numeric($token2)) {
+
+                            $this->content = $this->update($token2);
+                        } else {
+                            if (method_exists($this, $token2)) {
+                                $this->content = $this->$token2();
+                            } else {
+                                $this->content = 'Method not found';
+                            }
+                        }
+                    } else {
+                        $this->content = 'Method not found';
+                    }
                 }
         }
     }
@@ -82,5 +98,13 @@ class PostController
     {
 
         return view('newpost');
+    }
+    /**
+     * @return string
+     */
+    public function save()
+    {
+
+      $this->Post->save($_POST);
     }
 }

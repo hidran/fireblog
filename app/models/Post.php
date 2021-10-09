@@ -26,4 +26,21 @@ class Post {
         }
         return $result;
     }
+    public function save(array $data = [])
+    {
+        $sql = 'INSERT INTO posts (email, title, message,datecreated)';
+        $sql .= 'values (:email, :title, :message,:datecreated)';
+
+        $stm = $this->conn->prepare($sql);
+
+        $stm->execute([
+            'email' => $data['email'],
+            'message'=>  $data['message'],
+            'title'=>  $data['title'],
+            'datecreated' =>date('Y-m-d H:i:s')
+
+        ]);
+
+        return $stm->rowCount();
+    }
 }
