@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Post;
 use PDO;
 
 class PostController
@@ -9,10 +10,11 @@ class PostController
     protected $layout = 'layout/index.tpl.php';
     public $content = 'Hidran Arias';
     protected $conn;
-
+protected $Post;
     public function __construct(PDO $conn)
     {
         $this->conn = $conn;
+        $this->Post = new Post($conn);
 
     }
 
@@ -43,9 +45,7 @@ class PostController
     }
  public function getPosts()
  {
-     $posts = $this->conn->query('select * from posts')
-         ->fetchAll(PDO::FETCH_OBJ);
-     ob_start();
+     $posts = $this->Post->all();
      require __DIR__ . '/../views/posts.tpl.php';
      $content = ob_get_contents();
      ob_end_clean();

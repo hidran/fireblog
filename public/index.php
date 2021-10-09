@@ -9,10 +9,13 @@ require_once __DIR__.'/../DB/DBPDO.php';
 
 require_once __DIR__.'/../DB/DbFactory.php';
 
-$data= require 'config/database.php';
-require_once __DIR__ . '/../app/controllers/PostController.php';
-try {
 
+require_once __DIR__ . '/../app/controllers/PostController.php';
+
+require_once __DIR__ . '/../app/models/Post.php';
+
+try {
+    $data= require 'config/database.php';
     $conn = DbFactory::create($data)->getConn();
     $controller = new PostController($conn);
 $controller->process();
