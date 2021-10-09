@@ -13,12 +13,25 @@ class PostController
     public function __construct(PDO $conn)
     {
         $this->conn = $conn;
-        $posts = $this->conn->query('select * from posts')
-            ->fetchAll(PDO::FETCH_OBJ);
-        ob_start();
-        require __DIR__.'/../views/posts.tpl.php';
-        $this->content = ob_get_contents();
-        ob_end_clean();
+
+    }
+
+    public function process()
+    {
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+        $url = trim($url, '/');
+        $tokens = explode('/', $url);
+
+        switch ($tokens[0]) {
+            case 'posts':
+                $this->content = call_user_func([$this, 'getPosts']);
+                break;
+            case 'post':
+                if($_SERVER['REQUEST_METHOD'] === 'GET'){
+                    $this->content = call_user_func([$this, 'show'], $tokens[1]);
+                    break;
+                }
+        }
     }
 
     /**
@@ -28,7 +41,16 @@ class PostController
     {
         require $this->layout;
     }
-
+ public function getPosts()
+ {
+     $posts = $this->conn->query('select * from posts')
+         ->fetchAll(PDO::FETCH_OBJ);
+     ob_start();
+     require __DIR__ . '/../views/posts.tpl.php';
+     $content = ob_get_contents();
+     ob_end_clean();
+     return $content;
+ }
     /**
      * @return string
      */
@@ -37,7 +59,8 @@ class PostController
         $message = ' this is a post message';
         ob_start();
         require_once __DIR__ . '/../views/post.tpl.php';
-        $this->content = ob_get_contents();
+        $content = ob_get_contents();
         ob_end_clean();
+        return $content;
     }
 }

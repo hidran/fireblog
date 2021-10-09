@@ -15,7 +15,7 @@ try {
 
     $conn = DbFactory::create($data)->getConn();
     $controller = new PostController($conn);
-
+$controller->process();
     $controller->display();
 
 }
