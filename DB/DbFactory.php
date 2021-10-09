@@ -16,7 +16,7 @@ class DbFactory {
         if(!array_key_exists('charset', $options)){
             $options['charset'] ='utf8';
         }
-        if(!array_key_exists('dsn', $options)){
+        if(!array_key_exists('dsn', $options, true)){
             if(!array_key_exists('driver', $options)){
                 throw  new \InvalidArgumentException('Nessun drive predefinito');
             }
