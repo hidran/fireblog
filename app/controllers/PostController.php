@@ -46,10 +46,7 @@ protected $Post;
  public function getPosts()
  {
      $posts = $this->Post->all();
-     require __DIR__ . '/../views/posts.tpl.php';
-     $content = ob_get_contents();
-     ob_end_clean();
-     return $content;
+    return view('posts', compact('posts'));
  }
     /**
      * @return string
