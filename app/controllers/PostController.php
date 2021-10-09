@@ -10,7 +10,8 @@ class PostController
     protected $layout = 'layout/index.tpl.php';
     public $content = 'Hidran Arias';
     protected $conn;
-protected $Post;
+    protected $Post;
+
     public function __construct(PDO $conn)
     {
         $this->conn = $conn;
@@ -23,14 +24,30 @@ protected $Post;
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $url = trim($url, '/');
         $tokens = explode('/', $url);
-
+        $action = $tokens[0];
+        $token2 = $tokens[1] ?? '';
         switch ($tokens[0]) {
             case 'posts':
-                $this->content = call_user_func([$this, 'getPosts']);
+            case '':
+            case 'home':
+                $this->content = $this > getPosts();
                 break;
             case 'post':
-                if($_SERVER['REQUEST_METHOD'] === 'GET'){
-                    $this->content = call_user_func([$this, 'show'], $tokens[1]);
+                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                    if ($token2) {
+                        if (is_numeric($token2)) {
+
+                            $this->content = $this->show($token2);
+                        } else {
+                            if (method_exists($this, $token2)) {
+                                $this->content = $this->$token2();
+                            } else {
+                                $this->content = 'Method not found';
+                            }
+                        }
+                    } else {
+                        $this->content = 'Method not found';
+                    }
                     break;
                 }
         }
@@ -43,11 +60,13 @@ protected $Post;
     {
         require $this->layout;
     }
- public function getPosts()
- {
-     $posts = $this->Post->all();
-    return view('posts', compact('posts'));
- }
+
+    public function getPosts()
+    {
+        $posts = $this->Post->all();
+        return view('posts', compact('posts'));
+    }
+
     /**
      * @return string
      */
@@ -55,5 +74,13 @@ protected $Post;
     {
         $post = $this->Post->find($postid);
         return view('post', compact('post'));
+    }
+    /**
+     * @return string
+     */
+    public function create()
+    {
+
+        return view('newpost');
     }
 }
