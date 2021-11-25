@@ -26,7 +26,7 @@
                         <a class='nav-link active' aria-current='page' href='/posts/index'>POSTS</a>
                     </li>
                     <li class='nav-item'>
-                        <a class='nav-link' href='/posts/create'>NEW POSTS</a>
+                        <a class='nav-link' href='/post/create'>NEW POSTS</a>
                     </li>
 
                 </ul>

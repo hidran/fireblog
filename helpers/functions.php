@@ -7,3 +7,6 @@ function view($view, array $data = []){
     ob_end_clean();
     return $data;
 }
+function redirect($url ='/'){
+    header("Location:$url");
+}

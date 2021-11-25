@@ -26,6 +26,7 @@ class PostController
         $tokens = explode('/', $url);
         $action = $tokens[0];
         $token2 = $tokens[1] ?? '';
+
         switch ($tokens[0]) {
             case 'posts':
             case '':
@@ -106,5 +107,6 @@ class PostController
     {
 
       $this->Post->save($_POST);
+        redirect('/');
     }
 }
