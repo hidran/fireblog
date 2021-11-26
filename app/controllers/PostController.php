@@ -21,53 +21,7 @@ class PostController
 
     public function process()
     {
-        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-        $url = trim($url, '/');
-        $tokens = explode('/', $url);
-        $action = $tokens[0];
-        $token2 = $tokens[1] ?? '';
 
-        switch ($tokens[0]) {
-            case 'posts':
-            case '':
-            case 'home':
-                $this->content = $this->getPosts();
-                break;
-            case 'post':
-                if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                    if ($token2) {
-                        if (is_numeric($token2)) {
-
-                            $this->content = $this->show($token2);
-                        } else {
-                            if (method_exists($this, $token2)) {
-                                $this->content = $this->$token2();
-                            } else {
-                                $this->content = 'Method not found';
-                            }
-                        }
-                    } else {
-                        $this->content = 'Method not found';
-                    }
-                    break;
-                }
-                elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    if ($token2) {
-                        if (is_numeric($token2)) {
-
-                            $this->content = $this->update($token2);
-                        } else {
-                            if (method_exists($this, $token2)) {
-                                $this->content = $this->$token2();
-                            } else {
-                                $this->content = 'Method not found';
-                            }
-                        }
-                    } else {
-                        $this->content = 'Method not found';
-                    }
-                }
-        }
     }
 
     /**
@@ -81,7 +35,8 @@ class PostController
     public function getPosts()
     {
         $posts = $this->Post->all();
-        return view('posts', compact('posts'));
+
+        $this->content = view('posts', compact('posts'));
     }
 
     /**

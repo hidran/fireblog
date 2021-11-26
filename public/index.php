@@ -12,8 +12,10 @@ try {
     $conn = DbFactory::create($data)->getConn();
     $router = new Router($conn);
     $router->loadRoutes($appConfig['routes']);
-    $router->dispatch();
-    $controller = new PostController($conn);
+    /**
+     * @var $controller PostController
+     */
+    $controller = $router->dispatch();
     $controller->process();
     $controller->display();
 
