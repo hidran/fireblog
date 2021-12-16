@@ -45,7 +45,7 @@ class PostController
     public function show(int $postid)
     {
         $post = $this->Post->find($postid);
-        return view('post', compact('post'));
+        $this->content = view('post', compact('post'));
     }
     /**
      * @return string
@@ -53,7 +53,7 @@ class PostController
     public function create()
     {
 
-        return view('newpost');
+        $this->content = view('newpost');
     }
     /**
      * @return string
