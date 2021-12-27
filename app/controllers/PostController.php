@@ -90,4 +90,18 @@ class PostController
 
 
     }
+
+    public function delete(int $id)
+    {
+        try {
+
+            $result = $this->Post->delete($id);
+            redirect('/');
+
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+
+
+    }
 }

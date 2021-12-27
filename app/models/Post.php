@@ -67,4 +67,20 @@ class Post {
 
 
     }
+
+    public function delete(int $id)
+    {
+        //
+
+
+        $sql = 'DELETE FROM  POSTS  WHERE id = :id';
+
+        $stm = $this->conn->prepare($sql);
+        $stm->bindParam(':id', $id, PDO::PARAM_INT);
+        $stm->execute();
+
+        return $stm->rowCount();
+
+
+    }
 }

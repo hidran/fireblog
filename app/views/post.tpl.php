@@ -12,16 +12,20 @@
     </p>
     <div><?= $post->message ?></div>
     <br>
-    <div class='form-group d-flex align-items-center'>
-        <form class='' action="/post/<?= $post->id ?>/edit" method='GET'>
+    <div class="form-group d-flex align-items-center justify-content-between row">
+        <div class="col-md-6">
+            <form class='' action="/post/<?= $post->id ?>/edit" method='GET'>
 
 
-            <input type='submit' class='btn btn-primary' value='EDIT'>
-        </form>
+                <input type='submit' class='btn btn-primary' value='EDIT'>
+            </form>
+        </div>
+        <div class='col-md-6'>
 
-        <form class='form-inline' action="/post/<?= $post->id ?>/delete" method='POST'>
-            <input type='submit' class='btn btn-danger' value='DELETE'>
+            <form class='form-inline' action="/post/<?= $post->id ?>/delete" method='POST'>
+                <input type='submit' class='btn btn-danger' value='DELETE'>
 
-        </form>
+            </form>
+        </div>
     </div>
 </article>
