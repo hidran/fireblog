@@ -49,7 +49,7 @@ class Post {
         //
 
 
-        $sql = 'UPDATE POSTS SET email =:email, title =:title, ';
+        $sql = 'UPDATE posts SET email =:email, title =:title, ';
         $sql .= ' message =:message';
         $sql .= ' WHERE id = :id';
 
@@ -73,7 +73,7 @@ class Post {
         //
 
 
-        $sql = 'DELETE FROM  POSTS  WHERE id = :id';
+        $sql = 'DELETE FROM  posts  WHERE id = :id';
 
         $stm = $this->conn->prepare($sql);
         $stm->bindParam(':id', $id, PDO::PARAM_INT);
