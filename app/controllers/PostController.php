@@ -107,4 +107,13 @@ class PostController
 
 
     }
+
+    public function saveComment($postid)
+    {
+        $comment = new Comment($this->conn);
+        $_POST['post_id'] = (int)$postid;
+        $comment->save($_POST);
+
+        redirect('/post/' . $postid);
+    }
 }

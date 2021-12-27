@@ -1,6 +1,7 @@
 <?php
 /**
-* @var $post PDOStatement;
+ * @var $post PDOStatement;
+ * * @var $comments PDOStatement;
  */
 ?>
 <article>
@@ -32,6 +33,26 @@
         <div class='push-md-3 col-md-6 text-md-center'>
             <hr>
             <h2>COMMENTS</h2>
+            <form action='/post/<?= $post->id ?>/comment' method='POST'>
+
+                <div class='form-group'>
+
+                    <label for='email'>Email</label>
+                    <input class='form-control' name='email' type='email' id='email' required>
+
+                </div>
+
+                <div class='form-group'>
+
+
+                    <label for='message'>Message</label>
+                    <textarea required name='comment' class='form-control' id='message'></textarea>
+
+                </div>
+                <div class='form-group text-md-center'>
+                    <button class='btn  btn-success'>Save</button>
+                </div>
+            </form>
             <?php
 
             if (!empty($comments)) {
