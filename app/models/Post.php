@@ -10,7 +10,7 @@ class Post {
     public  function all()
     {
         $result = [];
-        $stm = $this->conn->query('select * from posts ORDER  BY datecreated desc');
+        $stm = $this->conn->query('select * from posts ORDER BY datecreated DESC');
         if($stm){
             $result = $stm->fetchAll(PDO::FETCH_OBJ);
         }

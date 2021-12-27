@@ -47,6 +47,16 @@ class PostController
         $post = $this->Post->find($postid);
         $this->content = view('post', compact('post'));
     }
+
+    public function edit($postid)
+    {
+
+        $post = $this->Post->find($postid);
+
+        $this->content = view('editPost', compact('post'));
+
+    }
+
     /**
      * @return string
      */
@@ -55,6 +65,7 @@ class PostController
 
         $this->content = view('newpost');
     }
+
     /**
      * @return string
      */
