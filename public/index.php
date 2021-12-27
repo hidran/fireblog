@@ -16,7 +16,7 @@ try {
      * @var $controller PostController
      */
     $controller = $router->dispatch();
-    $controller->process();
+
     $controller->display();
 
 }

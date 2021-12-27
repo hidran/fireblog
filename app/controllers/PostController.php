@@ -7,22 +7,17 @@ use App\Models\Post;
 use PDO;
 use PDOException;
 
-class PostController
+class PostController extends BaseController
 {
-    protected $layout = 'layout/index.tpl.php';
-    public $content = 'Hidran Arias';
-    protected $conn;
+
     protected $Post;
 
     public function __construct(PDO $conn)
     {
-        $this->conn = $conn;
+
+        parent::__construct($conn);
+
         $this->Post = new Post($conn);
-
-    }
-
-    public function process()
-    {
 
     }
 
