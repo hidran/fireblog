@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Post;
 use PDO;
+use PDOException;
 
 class PostController
 {
@@ -40,7 +41,7 @@ class PostController
     }
 
     /**
-     * @return string
+     * @return void
      */
     public function show(int $postid)
     {
@@ -58,7 +59,7 @@ class PostController
     }
 
     /**
-     * @return string
+     * @return void
      */
     public function create()
     {
@@ -67,12 +68,26 @@ class PostController
     }
 
     /**
-     * @return string
+     * @return void
      */
     public function save()
     {
 
-      $this->Post->save($_POST);
+        $this->Post->save($_POST);
         redirect('/');
+    }
+
+    public function store(string $id)
+    {
+        try {
+
+            $this->Post->store($_POST);
+            redirect('/');
+
+        } catch (PDOException $e) {
+            return $e->getMessage();
+        }
+
+
     }
 }

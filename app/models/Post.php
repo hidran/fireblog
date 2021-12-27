@@ -20,8 +20,8 @@ class Post {
     {
         $result = [];
         $stm = $this->conn->prepare('select * from posts where id=:id');
-        $stm->execute(['id' => $id]);
-        if($stm){
+        $res = $stm->execute(['id' => $id]);
+        if ($res) {
             $result = $stm->fetch(PDO::FETCH_OBJ);
         }
         return $result;
@@ -35,12 +35,36 @@ class Post {
 
         $stm->execute([
             'email' => $data['email'],
-            'message'=>  $data['message'],
-            'title'=>  $data['title'],
-            'datecreated' =>date('Y-m-d H:i:s')
+            'message' => $data['message'],
+            'title' => $data['title'],
+            'datecreated' => date('Y-m-d H:i:s')
 
         ]);
 
         return $stm->rowCount();
+    }
+
+    public function store(array $data = [])
+    {
+        //
+
+
+        $sql = 'UPDATE POSTS SET email =:email, title =:title, ';
+        $sql .= ' message =:message';
+        $sql .= ' WHERE id = :id';
+
+        $stm = $this->conn->prepare($sql);
+
+        $stm->execute([
+                'id' => $data['id'],
+                'email' => $data['email'],
+                'message' => $data['message'],
+                'title' => $data['title']
+            ]
+        );
+
+        return $stm->rowCount();
+
+
     }
 }
