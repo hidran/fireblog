@@ -1,7 +1,7 @@
 <?php
 function view($view, array $data = [])
 {
-    var_dump($view);
+
     extract($data);
     ob_start();
     require __DIR__ . '/../app/views/' . $view . '.tpl.php';
